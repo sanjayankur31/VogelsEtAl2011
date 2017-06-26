@@ -2,3 +2,4 @@ pynn
 numpy
 lazyarray
 matplotlib
+neo
