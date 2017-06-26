@@ -21,6 +21,7 @@ Adapted from:
 #############################################
 
 
+from __future__ import print_function
 from pyNN.random import RandomDistribution, NumpyRNG
 from pyNN.utility import get_script_args, Timer, ProgressBar, init_logging, normalized_filename
 import matplotlib.pyplot as plt
@@ -356,21 +357,21 @@ print("------- Creating inhibitory projections -------")
 print("-----------------------------------------------")
 
 print('i_to_e: ')
-connections['i_to_e'] 		= Projection(inhibPopulation, 	excPopulation, 		fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_e'] 		= Projection(inhibPopulation, 	excPopulation, 		fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_p1: ')
-connections['i_to_p1'] 		= Projection(inhibPopulation, 	pattern1, 		fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_p1'] 		= Projection(inhibPopulation, 	pattern1, 		fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_p1_stim: ')
-connections['i_to_p1_stim'] 	= Projection(inhibPopulation, 	pattern1_stim, 		fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_p1_stim'] 	= Projection(inhibPopulation, 	pattern1_stim, 		fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_p2: ')
-connections['i_to_p2'] 		= Projection(inhibPopulation, 	pattern2, 		fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_p2'] 		= Projection(inhibPopulation, 	pattern2, 		fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_p2_stim: ')
-connections['i_to_p2_stim'] 	= Projection(inhibPopulation, 	pattern2_stim, 		fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_p2_stim'] 	= Projection(inhibPopulation, 	pattern2_stim, 		fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_pi: ')
-connections['i_to_pi'] 		= Projection(inhibPopulation, 	patternIntersection, 	fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_pi'] 		= Projection(inhibPopulation, 	patternIntersection, 	fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_c: ')
-connections['i_to_c'] 		= Projection(inhibPopulation, 	controlPopulation, 	fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory')
+connections['i_to_c'] 		= Projection(inhibPopulation, 	controlPopulation, 	fpc, 	inhibitory_stdp_synapse_type)
 print('\ni_to_i: ')
-connections['i_to_i'] 		= Projection(inhibPopulation, 	inhibPopulation, 	fpc, 	inhibitory_stdp_synapse_type, receptor_type='inhibitory') # "eta" should be always zero
+connections['i_to_i'] 		= Projection(inhibPopulation, 	inhibPopulation, 	fpc, 	inhibitory_stdp_synapse_type) # "eta" should be always zero
 
 
 
@@ -472,13 +473,13 @@ print("Starting simulation to generate Fig. 4")
 print("--------------------------------------")
 
 
-connections['i_to_e'].set(weight=0)
-connections['i_to_p1'].set(weight=0)
-connections['i_to_p1_stim'].set(weight=0)
-connections['i_to_p2'].set(weight=0)
-connections['i_to_p2_stim'].set(weight=0)
-connections['i_to_pi'].set(weight=0)
-connections['i_to_c'].set(weight=0)
+connections['i_to_e'].set(weight=-0.0000000001)
+connections['i_to_p1'].set(weight=-0.000000001)
+connections['i_to_p1_stim'].set(weight=-0.000000001)
+connections['i_to_p2'].set(weight=-0.000000001)
+connections['i_to_p2_stim'].set(weight=-0.000000001)
+connections['i_to_pi'].set(weight=-0.00000001)
+connections['i_to_c'].set(weight=-0.00000001)
 
 
 connections['i_to_e'].set(eta=eta)
