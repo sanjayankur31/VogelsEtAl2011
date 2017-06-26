@@ -11,7 +11,7 @@ Original implementation reference:
 Adapted from:
 
 	Vogels, T. P., H. Sprekeler, F. Zenke, C. Clopath, and W. Gerstner. 'Inhibitory Plasticity Balances
-	Excitation and Inhibition in Sensory Pathways and Memory Networks.' Science (November 10, 2011). 
+	Excitation and Inhibition in Sensory Pathways and Memory Networks.' Science (November 10, 2011).
 """
 
 #############################################
@@ -25,13 +25,14 @@ from pyNN.random import RandomDistribution, NumpyRNG
 from pyNN.utility import get_script_args, Timer, ProgressBar, init_logging, normalized_filename
 import matplotlib.pyplot as plt
 from auxRoutines import *
+from pyNN.nest import native_synapse_type
 
-simulator_name = get_script_args(1)[0]  
+simulator_name = get_script_args(1)[0]
 
-exec("from pyNN.%s import *" % simulator_name)
+exec("from pyNN.{} import *".format(simulator_name))
 
 print("\n")
-print "Starting PyNN with simulator: %s"%simulator_name
+print("Starting PyNN with simulator: {}".format(simulator_name))
 
 timer = Timer()
 
@@ -92,17 +93,17 @@ synapseDelay = 0.5 # [ms]
 
 
 neuronParameters = 	{
-			'tau_m':	tau_m,	
-			'cm':		cm, 	
-			'v_rest':	v_rest,	
-			'v_thresh':	v_thresh, 	
-			'tau_syn_E':	tau_syn_E,	
-			'tau_syn_I':	tau_syn_I,	
-			'e_rev_E':	e_rev_E,	
-			'e_rev_I':	e_rev_I,	
-			'v_reset':	v_reset,	
-			'tau_refrac':	tau_refrac,	
-			'i_offset': 	i_offset	
+			'tau_m':	tau_m,
+			'cm':		cm,
+			'v_rest':	v_rest,
+			'v_thresh':	v_thresh,
+			'tau_syn_E':	tau_syn_E,
+			'tau_syn_I':	tau_syn_I,
+			'e_rev_E':	e_rev_E,
+			'e_rev_I':	e_rev_I,
+			'v_reset':	v_reset,
+			'tau_refrac':	tau_refrac,
+			'i_offset': 	i_offset
 			}
 
 
@@ -215,12 +216,8 @@ progress_bar = ProgressBar(width=30)
 
 fpc 	= FixedProbabilityConnector(connectivity, callback=progress_bar)
 
-
-exc_synapse_type 		= StaticSynapse(weight = weightExcSynapses, delay=synapseDelay)
-
-inhibitory_stdp_synapse_type 	= STDPMechanism(weight_dependence = AdditiveWeightDependence(w_min=0, w_max=10*weightInhibToInhibSynapses),
-                         		timing_dependence = Vogels2011Rule(eta=0, rho=rho),
-                         		weight=weightInhibToInhibSynapses, delay=synapseDelay)
+exc_synapse_type 	= native_synapse_type('static_synapse')(**{'weight': weightExcSynapses, 'delay': synapseDelay})
+inhibitory_stdp_synapse_type 	= native_synapse_type('vogels_sprekeler_synapse')(**{'weight': -0.00001, 'Wmax': -3000., 'alpha': .12, 'eta': 0.01, 'tau': 20.})
 
 print("-----------------------------------------------")
 print("------- Creating excitatory projections -------")
@@ -467,7 +464,7 @@ fig.canvas.draw()
 ## 	Inhibitory to excitatory synapses are turned to 0 efficacy
 ##	The network is forced out of the AI regime and begins to fire at high rates
 ## 	Inhibitory plasticity is turned on.
-## 	Original simulation time: 
+## 	Original simulation time:
 
 print("\n")
 print("--------------------------------------")
@@ -583,7 +580,7 @@ fig.canvas.draw()
 
 ## Fig. 4, C
 ##
-## 	The excitatory non-zero weights of the two designated memory patterns 
+## 	The excitatory non-zero weights of the two designated memory patterns
 ## 	are increased ad-hoc by a factor of 5. The neurons of hte subset begin
 ## 	to exhibit elevated and more sychronized activity
 ##	Original simulation time: 5 sec (5000 ms)
