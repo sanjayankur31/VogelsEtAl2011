@@ -650,11 +650,6 @@ class VogelsSprekeler:
               file=self.weights_file_handle_IE)
         self.weights_file_handle_IE.close()
 
-        local_neurons = [stat['global_id'] for stat in
-                         nest.GetStatus(self.neuronsE) if stat['local']]
-        print("{},".format(len(local_neurons)), file=self.ca_file_handle_E)
-        self.ca_file_handle_E.close()
-
 
 if __name__ == "__main__":
     # Set up logging configuration
