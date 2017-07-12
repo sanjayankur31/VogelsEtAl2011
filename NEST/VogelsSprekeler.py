@@ -86,7 +86,7 @@ class VogelsSprekeler:
         self.pattern_count = 0
 
         # Look at the supplementary material to see how this affects the network
-        self.wbar = 0.5
+        self.wbar = 3.0
         self.weightEE = self.wbar
         self.weightII = self.wbar * -10.
         self.weightEI = self.wbar
@@ -664,7 +664,7 @@ if __name__ == "__main__":
     # set up neurons, connections, spike detectors, files
     simulation.prerun_setup(
         stabilisation_time=2000.,
-        recording_interval=100.)
+        recording_interval=250.)
     # print em up
     simulation.print_simulation_parameters()
     logging.info("Rank {}: SIMULATION SETUP".format(simulation.rank))
