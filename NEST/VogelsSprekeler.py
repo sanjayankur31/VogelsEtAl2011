@@ -7,7 +7,7 @@ File: VogelsSprekeler.py
 This implementation adds location information to the neurons to make it easier
 to plot network snapshots. The original model does not incorporate location
 information. Please note that the inclusion of geometrical information does not
-affect the network in anyway - no delays are included, for example.
+affect the network in any way.
 
 *** NOTE: Requires NEST >= 2.12 ***
 https://github.com/nest/nest-simulator/releases/tag/v2.12.0
@@ -41,7 +41,7 @@ import logging
 
 class VogelsSprekeler:
 
-    """Simulations for my PhD 2016."""
+    """VogelsSprekeler 2016"""
 
     def __init__(self):
         """Initialise variables."""
@@ -85,7 +85,7 @@ class VogelsSprekeler:
         self.pattern_spike_count_files = []
         self.pattern_count = 0
 
-        # Look at the supplementary material to see how this affects the network
+        # Supplementary material documents how this affects the network
         self.wbar = 3.0
         self.weightEE = self.wbar
         self.weightII = self.wbar * -10.
